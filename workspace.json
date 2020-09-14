@@ -1,6 +1,116 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "my-first-vue-app": {
+      "projectType": "application",
+      "root": "apps/my-first-vue-app",
+      "sourceRoot": "apps/my-first-vue-app/src",
+      "architect": {
+        "build": {
+          "builder": "@nx-plus/vue:browser",
+          "options": {
+            "dest": "dist/apps/my-first-vue-app",
+            "index": "apps/my-first-vue-app/public/index.html",
+            "main": "apps/my-first-vue-app/src/main.ts",
+            "tsConfig": "apps/my-first-vue-app/tsconfig.app.json"
+          },
+          "configurations": {
+            "production": {
+              "mode": "production",
+              "filenameHashing": true,
+              "productionSourceMap": true,
+              "css": {
+                "extract": true,
+                "sourceMap": false
+              }
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nx-plus/vue:dev-server",
+          "options": {
+            "browserTarget": "my-first-vue-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "my-first-vue-app:build:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/my-first-vue-app/tsconfig.app.json",
+              "apps/my-first-vue-app/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/my-first-vue-app/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/my-first-vue-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "my-first-vue-app-e2e": {
+      "root": "apps/my-first-vue-app-e2e",
+      "sourceRoot": "apps/my-first-vue-app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/my-first-vue-app-e2e/cypress.json",
+            "tsConfig": "apps/my-first-vue-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "my-first-vue-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "my-first-vue-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["apps/my-first-vue-app-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/my-first-vue-app-e2e/**/*"]
+          }
+        }
+      }
+    },
+    "my-button": {
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/my-button/tsconfig.lib.json",
+              "libs/my-button/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/my-button/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/my-button/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "root": "libs/my-button",
+      "sourceRoot": "libs/my-button/src"
+    }
+  },
   "cli": {
     "defaultCollection": "@nrwl/workspace"
   }

@@ -15,7 +15,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@example-vue-monorepo/my-button": ["libs/my-button/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

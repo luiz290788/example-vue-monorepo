@@ -21,5 +21,16 @@
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "my-first-vue-app": {
+      "tags": []
+    },
+    "my-first-vue-app-e2e": {
+      "tags": [],
+      "implicitDependencies": ["my-first-vue-app"]
+    },
+    "my-button": {
+      "tags": []
+    }
+  }
 }
